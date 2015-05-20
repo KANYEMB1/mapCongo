@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ LUSENGE MAKONGA ET KANYEMB NA NGOY
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LUSENGE MAKONGA ET KANYEMB NA NGOY </title>
+<style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: auto;
+        padding: 0px
+      }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+// cet example affiche un marker 
+// qd l utilisateur clic sur le marker l'infobulle s'ouvre et donne la description 
+//le maximum de pixels est px
+//creation de La fonction initialise
+function initialize() 
+{
+	
+  var myLatlng = new google.maps.LatLng(1.249874, 29.595230);
+  var data = [
+      ['Rivière Ituri ', 1.249874, 29.595230, 10],
+      ['Aéroport Internationale', 1.573872, 30.237930, 9],
+      ['Centre de formation', 1.908800, 29.754531, 8],
+      ['Dugu Centre', 2.007619, 30.496109, 7],
+      ['CHAPELE Saint Paul',2.057026, 29.386489, 6],
+      ['Base Militaire de l’ONU', 1.420116, 30.463150, 5]
+      ['Pont de Kamonda', 1.403641,29.705093, 4],
+      ['Hopital Adi',3.417744, 30.803726, 3],
+      ['Village Pigmées de Katoto',1.085113, 29.166763, 2],
+      ['Ituri Hôtel la couronne', 2.885715, 30.869644, 1],
+    ];
+  var mapOptions = {
+    zoom: 8,
+    center: myLatlng
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+ 
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    for (i = 0; i < data.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(data[i][1], data[i][2]),
+        map: map
+      });
+ 
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(data[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+<body>
+<div class="container" id="map-canvas">
+</div>
+</body>
+</html>
+
